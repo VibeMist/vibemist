@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Fresh - VibeMist Drop 1</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- EmailJS Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-icon {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            background-image: url('https://i.postimg.cc/sxHztTWn/Chat-GPT-Image-Jul-27-2025-01-04-59-AM-1.png');
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 15px 40px rgba(212, 165, 116, 0.4);
+            margin-bottom: 1rem;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #D4A574, #F4C2A1, #B8956A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 0 30px rgba(212, 165, 116, 0.3);
+        }
+        
+        .brand-tagline {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #D4A574;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+        
+        .stock-alert {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+            to { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 1rem;
+        }
+        
+        .price-breakdown-hero {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #D4A574, #F4C2A1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+        }
+       
+        .product-image {
+            width: 350px;
+            height: 350px;
+            border-radius: 20px;
+            margin: 2rem auto 1rem auto;
+            background-image: url('https://i.postimg.cc/ZYCMHYRP/gym.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.4);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,255,255,0.05) 0%, rgba(0,0,0,0.1) 100%);
+            border-radius: 20px;
+        }
+        
+        .product-overlay {
+            position: relative;
+            margin: 0 auto 2rem auto;
+            width: fit-content;
+            background: rgba(0,0,0,0.8);
+            color: #00ffff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,255,255,0.3);
+            text-align: center;
+            z-index: 10;
+        }
+        
+        /* Buttons */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #00ffff, #0099cc);
+            color: #000;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.6);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid #00ffff;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* UPI Section */
+        .upi-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        .upi-id {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #00ffff;
+            margin: 0.5rem 0;
+            background: rgba(0,0,0,0.5);
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upi-id:hover {
+            background: rgba(0,255,255,0.1);
+            transform: scale(1.05);
+        }
+        
+        /* Ingredients */
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .ingredient-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 1rem;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 3px solid #D4A574;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .ingredient-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(212, 165, 116, 0.3);
+        }
+        
+        /* Pricing Section */
+        .pricing-section {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .price-container {
+            margin: 1rem 0;
+        }
+        
+        .mrp {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: line-through;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .current-price {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .launch-price {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact */
+        .contact-info {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .instagram-link {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+            border: 2px solid #00ffff;
+            border-radius: 25px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .instagram-link:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        /* Order notification */
+        .order-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 255, 0, 0.9);
+            color: #000;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 3000;
+        }
+        
+        .order-notification.show {
+            transform: translateX(0);
+        }
+        
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #00ffff, #0099cc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .music-player:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(0, 255, 255, 0.6);
+        }
+        
+        .music-player.playing {
+            animation: musicPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes musicPulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(0, 255, 255, 0.4); }
+            50% { box-shadow: 0 8px 25px rgba(0, 255, 255, 0.8), 0 0 0 10px rgba(0, 255, 255, 0.1); }
+        }
+        
+        .music-icon {
+            font-size: 24px;
+            color: #000;
+            transition: all 0.3s ease;
+        }
+        
+        .music-player.playing .music-icon {
+            animation: rotate 2s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Order Pages */
+        .order-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+        }
+        
+        .order-page {
+            max-width: 400px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.3);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            position: relative;
+        }
+        
+        .order-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: none;
+            border: none;
+            color: #00ffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.2);
+            color: white;
+        }
+        
+        .order-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .order-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .order-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .order-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .item-info h4 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        .item-info p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+        
+        .item-price {
+            color: #00ffff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        
+        .total-section {
+            border-top: 2px solid #00ffff;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #00ffff;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #00ffff;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+        }
+        
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .payment-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .payment-method:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+        }
+        
+        .payment-method.selected {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.2);
+        }
+        
+        .payment-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .payment-icon {
+            font-size: 1.5rem;
+        }
+        
+        .payment-details h4 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        .payment-details p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.8rem;
+        }
+        
+        .radio-button {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .payment-method.selected .radio-button {
+            border-color: #00ffff;
+        }
+        
+        .payment-method.selected .radio-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #00ffff;
+            border-radius: 50%;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .logo-icon {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .product-image {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .order-page {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo-icon"></div>
+                <h1 class="logo">VIBEMIST</h1>
+                <div class="brand-tagline">Smell Your Vibe</div>
+            </div>
+            <p class="tagline">Smells like hustle. Priced like water. 💪</p>
+            <div class="stock-alert">🔥 Only 20 bottles left!</div>
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <span style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.6); text-decoration: line-through; display: block; margin-bottom: 0.3rem;">MRP ₹299</span>
+                <div class="price">₹149</div>
+            </div>
+            <div style="font-size: 0.8rem; color: #D4A574; margin-bottom: 1rem; font-weight: 500;">
+                + delivery charges
+            </div>
+            <div class="price-breakdown-hero">
+                <span style="color: #00ffff; font-weight: 600;">Starting at ₹149</span>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div style="color: #00ffff; font-size: 2rem;">↓</div>
+        </div>
+    </section>
+
+    <!-- About Product -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">About VibeMist 🧴</h2>
+            <div class="section-content">
+                <p>Your gym bag's new secret weapon. Fresh AF fragrance designed for the grind. 💯</p>
+                <br>
+                <p>Drop 1 is here and it's limited. Once these 20 bottles are gone, they're GONE. No restocks, no second chances. 🚫</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Image -->
+    <section class="section">
+        <div class="container">
+            <div class="product-image"></div>
+            <div class="product-overlay">
+                Premium Gym Fresh Fragrance 🔥
+            </div>
+            
+            <!-- Buy Section -->
+            <div class="button-container" style="margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="showOrderPage()">
+                    💳 Buy Now - ₹149 + delivery
+                </button>
+                
+                <a href="https://www.instagram.com/vibemist.lab/" class="btn btn-secondary" target="_blank">
+                    📩 DM to Order on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fragrance Notes -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Fragrance Notes 🌿</h2>
+            <div class="ingredients-grid">
+                <div class="ingredient-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🍃</div>
+                    <div>Fresh Mint</div>
+                </div>
+                <div class="ingredient-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🌊</div>
+                    <div>Ocean Breeze</div>
+                </div>
+                <div class="ingredient-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🌿</div>
+                    <div>Eucalyptus</div>
+                </div>
+                <div class="ingredient-card">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚡</div>
+                    <div>Energy Boost</div>
+                </div>
+            </div>
+            <div class="section-content">
+                <p>Clean, fresh, and energizing. Perfect for pre-workout motivation and post-workout freshness. 🔥</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick UPI Section -->
+    <section class="section">
+        <div class="container">
+            <div class="upi-section">
+                <div style="font-weight: 600; margin-bottom: 0.5rem;">Quick UPI Payment:</div>
+                <div class="upi-id" onclick="copyUPI()" title="Click to copy">harshilgarg31@oksbi</div>
+                <div style="font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                    Final amount will be calculated at checkout ➝ DM screenshot to confirm ✅
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Hit Us Up 📱</h2>
+            <div class="contact-info">
+                <p>Questions? Vibes? Just wanna chat?</p>
+                <br>
+                <a href="https://www.instagram.com/vibemist.lab/" class="instagram-link" target="_blank">
+                    📸 @vibemist.lab
+                </a>
+                <br><br>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+                    DMs are always open. We reply fast! ⚡
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Overlay -->
+    <div class="order-overlay" id="orderOverlay">
+        <div class="order-page">
+            <button class="back-btn" onclick="hideOrderPage()">←</button>
+            
+            <div class="order-header">
+                <h2 class="order-title">Complete Your Order</h2>
+                <p class="order-subtitle">You're one step away from peak performance!</p>
+            </div>
+            
+            <div class="order-details">
+                <div class="order-item">
+                    <div class="item-info">
+                        <h4>VibeMist Drop 1</h4>
+                        <p>Premium Gym Fresh Fragrance • 100ml</p>
+                    </div>
+                    <div class="item-price">₹149</div>
+                </div>
+                
+                <div class="order-item" id="shippingItem">
+                    <div class="item-info">
+                        <h4>Shipping Charges</h4>
+                        <p id="shippingText">Select payment method</p>
+                    </div>
+                    <div class="item-price" id="shippingPrice">₹0</div>
+                </div>
+                
+                <div class="order-item total-section">
+                    <div class="item-info">
+                        <h4>Total Amount</h4>
+                        <p>Including all taxes</p>
+                    </div>
+                    <div class="total-price" id="totalPrice">₹149</div>
+                </div>
+            </div>
+            
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="customerName">Full Name *</label>
+                    <input type="text" id="customerName" name="customerName" required placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerPhone">Phone Number *</label>
+                    <input type="tel" id="customerPhone" name="customerPhone" required placeholder="+91 9999999999">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerEmail">Email Address</label>
+                    <input type="email" id="customerEmail" name="customerEmail" placeholder="your@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerAddress">Delivery Address *</label>
+                    <textarea id="customerAddress" name="customerAddress" required placeholder="Enter your complete address with pincode" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Payment Method *</label>
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="selectPayment('online')">
+                            <div class="payment-info">
+                                <div class="payment-icon">💳</div>
+                                <div class="payment-details">
+                                    <h4>Online Payment (Razorpay)</h4>
+                                    <p>Card/UPI/Net Banking + ₹50 shipping</p>
+                                </div>
+                            </div>
+                            <div class="radio-button"></div>
+                        </div>
+                        
+                        <div class="payment-method" onclick="selectPayment('cod')">
+                            <div class="payment-info">
+                                <div class="payment-icon">💰</div>
+                                <div class="payment-details">
+                                    <h4>Cash on Delivery</h4>
+                                    <p>Pay on delivery + ₹80 shipping</p>
+                                </div>
+                            </div>
+                            <div class="radio-button"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button type="submit" class="btn btn-primary" id="orderButton">Complete Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player" onclick="toggleMusic()">
+        <div class="music-icon">🎵</div>
+    </div>
+
+    <!-- Order Notification -->
+    <div class="order-notification" id="orderNotification">
+        Order placed successfully! 🎉
+    </div>
+
+    <!-- Background Music -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        console.log('Gym Fresh website loaded successfully');
+        console.log('Razorpay checkout script status:', typeof Razorpay !== 'undefined' ? 'Loaded' : 'Not loaded');
+
+        // Initialize EmailJS and customer data storage
+        emailjs.init('mIMnoktAX9UMVX0kS');
+        let orderData = {};
+
+        let selectedPaymentMethod = '';
+        let musicPlaying = false;
+
+        function showOrderPage() {
+            document.getElementById('orderOverlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideOrderPage() {
+            document.getElementById('orderOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function selectPayment(method) {
+            // Remove selected class from all payment methods
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked method
+            event.currentTarget.classList.add('selected');
+            selectedPaymentMethod = method;
+            
+            // Update shipping and total based on payment method
+            const shippingText = document.getElementById('shippingText');
+            const shippingPrice = document.getElementById('shippingPrice');
+            const totalPrice = document.getElementById('totalPrice');
+            const orderButton = document.getElementById('orderButton');
+            
+            if (method === 'online') {
+                shippingText.textContent = 'Online Payment Shipping';
+                shippingPrice.textContent = '₹50';
+                totalPrice.textContent = '₹199';
+                orderButton.textContent = 'Complete Order - ₹199';
+            } else if (method === 'cod') {
+                shippingText.textContent = 'COD Shipping';
+                shippingPrice.textContent = '₹80';
+                totalPrice.textContent = '₹229';
+                orderButton.textContent = 'Complete Order - ₹229';
+            }
+        }
+
+        function copyUPI() {
+            const upiId = 'harshilgarg31@oksbi';
+            navigator.clipboard.writeText(upiId).then(() => {
+                showNotification('UPI ID copied to clipboard!');
+            });
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('orderNotification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('backgroundMusic');
+            const player = document.querySelector('.music-player');
+            
+            if (musicPlaying) {
+                music.pause();
+                player.classList.remove('playing');
+                musicPlaying = false;
+            } else {
+                music.play();
+                player.classList.add('playing');
+                musicPlaying = true;
+            }
+        }
+
+        // Form submission handler
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate required fields
+            const name = document.getElementById('customerName').value.trim();
+            const phone = document.getElementById('customerPhone').value.trim();
+            const address = document.getElementById('customerAddress').value.trim();
+            
+            if (!name || !phone || !address || !selectedPaymentMethod) {
+                alert('Please fill in all required fields and select a payment method.');
+                return;
+            }
+            
+            // Process payment based on selected method
+            if (selectedPaymentMethod === 'online') {
+                processOnlinePayment();
+            } else if (selectedPaymentMethod === 'cod') {
+                processCODOrder();
+            }
+        });
+
+        function processOnlinePayment() {
+            console.log('Processing online payment with Razorpay');
+            
+            // Check if Razorpay is loaded
+            if (typeof Razorpay === 'undefined') {
+                console.error('Razorpay not loaded');
+                alert('Payment gateway not available. Please try COD payment.');
+                return;
+            }
+
+            const options = {
+                key: 'rzp_test_1DP5mmOlF5G5ag', // Replace with your actual test key
+                amount: 19900, // Amount in paise (₹199 = 19900 paise)
+                currency: 'INR',
+                name: 'Gym Fresh',
+                description: 'VibeMist Drop 1 - Premium Pre-Workout (₹149 + ₹50 shipping)',
+                image: 'https://i.postimg.cc/sxHztTWn/Chat-GPT-Image-Jul-27-2025-01-04-59-AM-1.png',
+                handler: function(response) {
+                    console.log('Payment successful:', response);
+                    
+                    // Collect order data for online payment
+                    const orderData = {
+                        orderId: 'VM' + Date.now(),
+                        fullName: document.getElementById('customerName').value,
+                        phone: document.getElementById('customerPhone').value,
+                        email: document.getElementById('customerEmail').value || 'Not provided',
+                        address: document.getElementById('customerAddress').value,
+                        quantity: 1,
+                        subtotal: 149,
+                        shipping: 50,
+                        total: 199,
+                        paymentMethod: 'Online Payment (Razorpay)',
+                        paymentId: response.razorpay_payment_id,
+                        date: new Date().toLocaleString()
+                    };
+                    
+                    // Send order email
+                    sendOrderEmail(orderData);
+                    
+                    showNotification('Payment successful! Order confirmed.');
+                    hideOrderPage();
+                },
+                prefill: {
+                    name: document.getElementById('customerName').value,
+                    email: document.getElementById('customerEmail').value,
+                    contact: document.getElementById('customerPhone').value
+                },
+                theme: {
+                    color: '#00ffff'
+                },
+                modal: {
+                    ondismiss: function() {
+                        console.log('Payment dialog closed');
+                    }
+                }
+            };
+
+            try {
+                const rzp = new Razorpay(options);
+                rzp.on('payment.failed', function(response) {
+                    console.error('Payment failed:', response.error);
+                    alert('Payment failed: ' + response.error.description);
+                });
+                rzp.open();
+                console.log('Razorpay checkout opened');
+            } catch (error) {
+                console.error('Error opening Razorpay:', error);
+                alert('Unable to open payment gateway. Please try COD payment.');
+            }
+        }
+
+        function processCODOrder() {
+            // Collect order data
+            const orderData = {
+                orderId: 'VM' + Date.now(),
+                fullName: document.getElementById('customerName').value,
+                phone: document.getElementById('customerPhone').value,
+                email: document.getElementById('customerEmail').value || 'Not provided',
+                address: document.getElementById('customerAddress').value,
+                quantity: 1,
+                subtotal: 149,
+                shipping: 80,
+                total: 229,
+                paymentMethod: 'Cash on Delivery',
+                date: new Date().toLocaleString()
+            };
+            
+            // Send order email
+            sendOrderEmail(orderData);
+            
+            showNotification('Order placed successfully! You will pay ₹229 on delivery.');
+            hideOrderPage();
+        }
+
+        function sendOrderEmail(data) {
+            // Prepare email parameters
+            const emailParams = {
+                to_email: 'vibemiststore@gmail.com',
+                to_name: 'VibeMist Store',
+                from_name: 'VibeMist Website',
+                order_id: data.orderId,
+                customer_name: data.fullName,
+                customer_phone: data.phone,
+                customer_email: data.email,
+                delivery_address: data.address,
+                quantity: data.quantity,
+                subtotal_amount: data.subtotal,
+                shipping_cost: data.shipping,
+                total_amount: data.total,
+                payment_method: data.paymentMethod,
+                order_date: data.date,
+                product_name: 'VibeMist Drop 1 - Premium Gym Fresh'
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_t26fwjh', 'template_dc8mx5l', emailParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                }, function(error) {
+                    console.error('Email failed to send:', error);
+                });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
